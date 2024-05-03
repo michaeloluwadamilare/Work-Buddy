@@ -115,8 +115,6 @@ const WorkoutDetails = ({workout}) => {
 
                 </div>
             </div>
-
-
         </>
     )
 }
