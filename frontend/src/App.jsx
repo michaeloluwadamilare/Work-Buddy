@@ -8,18 +8,18 @@ function App() {
 
   return (
     <>
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="pages">
-          <Routes>
-            <Route path="/" element={ <Home/> }></Route>
-            <Route path="*" element={<Notfound/>} />
-          </Routes>
-        </div> 
-      </BrowserRouter>
+      <div className="App">
+        <BrowserRouter>
+          <Navbar />
+          <div className="pages">
+            <Routes>
+              <Route path="/" element={ <Home/> }></Route>
+              <Route path="*" element={<Notfound/>} />
+            </Routes>
+          </div> 
+        </BrowserRouter>
 
-    </div>
+      </div>
       
     </>
   )
