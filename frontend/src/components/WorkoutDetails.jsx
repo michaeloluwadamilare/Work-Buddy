@@ -29,27 +29,31 @@ const WorkoutDetails = ({workout}) => {
         }
         
         try {
-          const response = await fetch(`http://localhost:4000/api/workouts/${workout._id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(editedWorkout),
-          });
-          const data = await response.json();
-          if (!response.ok) {
-            console.log(data.error);
-          }
-          if (response.ok) {
-            dispatch({ type: 'EDIT_WORKOUT', payload: editedWorkout });
-            const modalCloseBtn = document.getElementById(`closeBtn-${workout._id}`);
-            if (modalCloseBtn) {
-                modalCloseBtn.click();
+            const response = await fetch(`http://localhost:4000/api/workouts/${workout._id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(editedWorkout),
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                console.log(data.error);
             }
+            if (response.ok) {
+                dispatch({ type: 'EDIT_WORKOUT', payload: editedWorkout });
+                const modalCloseBtn = document.getElementById(`closeBtn-${workout._id}`);
+                if (modalCloseBtn) {
+                    modalCloseBtn.click();
+                }
+                MySwal.fire(
+                    'Updated!',
+                    'Workout has been Updated.',
+                    'success'
+                );
 
-
-          }
-          setIsError('')
+            }
+            setIsError('')
         } catch (err) {
             console.log(err);
         }
@@ -81,8 +85,7 @@ const WorkoutDetails = ({workout}) => {
                             'Cancelled',
                             data.error,
                             'error'
-                        );
-                        
+                        ); 
                     }
             
                     if (response.ok) {
@@ -92,19 +95,11 @@ const WorkoutDetails = ({workout}) => {
                             'success'
                         );
                         dispatch({type: 'DELETE_WORKOUT', payload: data })
-                        
                     }
                 }
                 deleteWorkout();
-                
             }
         });
-
-
-
-
-
-
     }
 
     const formatDate = (dateString) => {
