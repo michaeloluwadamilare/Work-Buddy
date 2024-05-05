@@ -1,5 +1,7 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useState } from "react";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 
 const WorkoutDetails = ({workout}) => {
@@ -7,6 +9,8 @@ const WorkoutDetails = ({workout}) => {
 
     const [isError, setIsError] = useState('');
     const [editedWorkout, setEditedWorkout] = useState({ ...workout });
+    const MySwal = withReactContent(Swal);
+
 
 
     const handleInputChange = (e) => {
@@ -52,19 +56,55 @@ const WorkoutDetails = ({workout}) => {
     };
 
 
-    const handleDelete = async() => {
-        const response = await fetch('http://localhost:4000/api/workouts/'+ workout._id, {
-          method: 'DELETE',
-        })
-        const data = await response.json();
-        if (!response.ok) {
-            setError(data.error)
-        }
+    const handleDelete = () => {
 
-        if (response.ok) {
-            dispatch({type: 'DELETE_WORKOUT', payload: data })
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this record!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor:'#1aac83',
+            cancelButtonColor: "#d33",
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                const deleteWorkout = async () => {
+                    const response = await fetch('http://localhost:4000/api/workouts/'+ workout._id, {
+                        method: 'DELETE',
+                    })
+                    const data = await response.json();
+                    if (!response.ok) {
+                         MySwal.fire(
+                            'Cancelled',
+                            data.error,
+                            'error'
+                        );
+                        
+                    }
             
-        }
+                    if (response.ok) {
+                        MySwal.fire(
+                            'Deleted!',
+                            'Workout has been deleted.',
+                            'success'
+                        );
+                        dispatch({type: 'DELETE_WORKOUT', payload: data })
+                        
+                    }
+                }
+                deleteWorkout();
+                
+            }
+        });
+
+
+
+
+
+
     }
 
     const formatDate = (dateString) => {
