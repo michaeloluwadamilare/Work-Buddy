@@ -32,7 +32,7 @@ const WorkoutForm = () => {
             setError(data.error)
             MySwal.fire({
                 icon: "error",
-                title: "Eroor!",
+                title: "Error!",
                 text: data.error
             });
         }
