@@ -53,7 +53,7 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-  max-height: fit-content;
+  max-height: 70%;
 }
 .workout-details h4 {
   margin: 0 0 10px 0;
@@ -97,15 +97,4 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
-}
-.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
-  border-radius: 4px;
-  margin: 20px 0;
-}
-input.error {
-  border: 1px solid var(--error);
 }

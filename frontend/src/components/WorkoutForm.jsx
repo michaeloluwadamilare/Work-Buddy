@@ -63,7 +63,7 @@ const WorkoutForm = () => {
                     type="text" 
                     {...registerWorkout('title', {required: 'Title is required'})} 
                 />
-                {errors.title && <p className="error">{errors.title.message}</p>}
+                {errors.title && <p className="text-danger">{errors.title.message}</p>}
 
 
                 <label>Load (in kg):</label>
@@ -72,7 +72,7 @@ const WorkoutForm = () => {
                     {...registerWorkout('load', {required: 'Load is required'})} 
 
                 />
-                {errors.load && <p className="error">{errors.load.message}</p>}
+                {errors.load && <p className="text-danger">{errors.load.message}</p>}
 
 
                 <label>Number of Reps:</label>
@@ -80,7 +80,7 @@ const WorkoutForm = () => {
                     type="number" 
                     {...registerWorkout('reps', {required: 'Reps is required'})} 
                 />
-                {errors.reps && <p className="error">{errors.reps.message}</p>}
+                {errors.reps && <p className="text-danger">{errors.reps.message}</p>}
 
 
                 <button>Add Workout</button>
