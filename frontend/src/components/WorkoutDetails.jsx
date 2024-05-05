@@ -2,6 +2,8 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useState } from "react";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 
 
 const WorkoutDetails = ({workout}) => {
@@ -107,20 +109,15 @@ const WorkoutDetails = ({workout}) => {
         });
     }
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' });
-    };
-
     return (
         <>
             <div className="workout-details">
                 <h4>{workout.title}</h4>
                 <p>Reps: <strong>{workout.reps}</strong></p>
                 <p>Loads(in Kg): {workout.load}</p>
-                <p>Created At: { formatDate(workout.createdAt) }</p>
+                <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
                 <button className="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target={`#Modal-${workout._id}`}>Edit</button>
-                <span onClick={handleDelete}>Delete</span>
+                <span onClick={handleDelete} className="btn btn-sm btn-danger"><i className="bi bi-trash"></i></span>
             </div>
 
             <div className="modal fade" id={`Modal-${workout._id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
