@@ -46,11 +46,14 @@ const WorkoutDetails = ({workout}) => {
                 if (modalCloseBtn) {
                     modalCloseBtn.click();
                 }
-                MySwal.fire(
-                    'Updated!',
-                    'Workout has been Updated.',
-                    'success'
-                );
+
+                MySwal.fire({
+                    icon: "success",
+                    title: "Updated!",
+                    text:'Workout has been Updated.',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
 
             }
             setIsError('')
@@ -89,11 +92,13 @@ const WorkoutDetails = ({workout}) => {
                     }
             
                     if (response.ok) {
-                        MySwal.fire(
-                            'Deleted!',
-                            'Workout has been deleted.',
-                            'success'
-                        );
+                        MySwal.fire({
+                            icon: "success",
+                            title: "Deleted!",
+                            text:'Workout has been deleted.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                         dispatch({type: 'DELETE_WORKOUT', payload: data })
                     }
                 }

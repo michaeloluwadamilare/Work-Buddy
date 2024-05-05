@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 
 
 const WorkoutForm = () => {
     const [error, setError] = useState(null);
     const { dispatch } = useWorkoutsContext();
+    const MySwal = withReactContent(Swal);
 
 
     const { register: registerWorkout, reset, handleSubmit, formState: { errors } } = useForm({
@@ -27,6 +30,11 @@ const WorkoutForm = () => {
         const data = await response.json();
         if (!response.ok) {
             setError(data.error)
+            MySwal.fire({
+                icon: "error",
+                title: "Eroor!",
+                text: data.error
+            });
         }
 
         if (response.ok) {
@@ -34,6 +42,13 @@ const WorkoutForm = () => {
             console.log('new workout added:', data)
             dispatch({type: 'CREATE_WORKOUT', payload: data })
             reset();
+            MySwal.fire({
+                icon: "success",
+                title: "Created!",
+                text:'Workout has been Created.',
+                showConfirmButton: false,
+                timer: 2000
+            });
         }
 
     }
