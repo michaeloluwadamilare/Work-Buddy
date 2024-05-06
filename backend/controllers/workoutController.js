@@ -62,4 +62,4 @@ const createWorkout = async (req, res) => {
     }
 } 
 
-module.exports = { createWorkout, getAllWorkout, getSingleWorkout, deleteWorkout, updateWorkout};
+module.exports = { createWorkout, getAllWorkout, getSingleWorkout, deleteWorkout, updateWorkout };
